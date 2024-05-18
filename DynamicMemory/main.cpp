@@ -8,6 +8,7 @@ using std::endl;
 
 void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
+int* push_back(int arr[], int& n, const int value);
 
 
 void main()
@@ -19,6 +20,11 @@ void main()
 
 	FillRand(arr, n);
 	Print(arr, n);
+
+	int value;
+	cout << "Введите добавляемое значение: "; cin >> value;
+	arr = push_back(arr, n, value);
+	Print(arr, n++);
 
 	delete[] arr;
 }
@@ -39,4 +45,20 @@ void Print(int arr[], const int n)
 
 	}
 	cout << endl;
+}
+int* push_back(int arr[], int& n, const int value)
+{
+	int* buffer = new int[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+	int a = 2;
+	int b = 3;
+	a = b;
+	arr = buffer;
+	arr[n] = value;
+	n++;
+	return arr;
 }
