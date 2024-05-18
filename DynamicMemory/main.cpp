@@ -12,10 +12,14 @@ void Print(int arr[], const int n);
 
 int* push_back(int arr[], int& n, const int value);
 int* push_front(int arr[], int& n, const int value);
+int* insert(int arr[], int& n, const int index);
 
 int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
+int* erase(int arr[], int& n, const int index);
 
+#define DYNAMIC_MEMORY_1
+#define DYNAMIC_MEMORY_2
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -26,7 +30,7 @@ void main()
 	FillRand(arr, n);
 	Print(arr, n);
 
-	int value;
+	int value, index;
 	cout << "Введите добавляемое значение: "; cin >> value;
 	arr = push_back(arr, n, value);
 	Print(arr, n++);
@@ -40,6 +44,9 @@ void main()
 	arr = pop_front(arr, n);
 	Print(arr, n);
 
+	cout << "Введите индекс удаляемого элемента: "; cin >> index;
+	arr = erase(arr, n, index);
+	Print(arr, n);
 
 	delete[] arr;
 }
@@ -89,6 +96,9 @@ int* push_front(int arr[], int& n, const int value)
 	n++;
 	return buffer;
 }
+int* insert(int arr[], int& n, const int index) {
+
+}
 int* pop_back(int arr[], int& n)
 {
 	int* buffer = new int[--n];
@@ -102,9 +112,16 @@ int* pop_back(int arr[], int& n)
 int* pop_front(int arr[], int& n)
 {
 	int* buffer = new int[--n];
-	for (int i = 0; i < n; i++)
-	{
-		buffer[i] = arr[i + 1];
+	for (int i = 0; i < n; i++)	buffer[i] = arr[i + 1];
+	delete[] arr;
+	return buffer;
+}
+int* erase(int arr[], int& n, const int index) {
+	int* buffer = new int[--n];
+	//for (int i = 0; i < index; i++)buffer[i] = arr[i];
+	//for (int i = 0; i < n; i++)buffer[i] = arr[i+1];
+	for (int i = 0; i < n; i++) {
+		buffer[i] = arr[i < index ? i : i + 1];
 	}
 	delete[] arr;
 	return buffer;
